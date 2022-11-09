@@ -1,0 +1,35 @@
+@page "/pizzas"
+@using BlazingPizza.Data
+@inject PizzaService PizzaSvc
+
+<div>
+    <h1>Choose your pizza</h1>
+    <p>We have all these delicious recipes:</p>
+    @if (todaysPizzas == null)
+        {
+            <p>We're finding out what pizzas are available today...</p>
+        }
+        else
+        {
+            <p>Rendered</p>
+        }
+</div>
+
+@code {
+    string todaysPizzas = null;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(firstRender)
+        {
+            Thread.Sleep(5000);
+            todaysPizzas = "pizza time";
+            Console.WriteLine(firstRender);
+            StateHasChanged();
+        }
+        else
+        {
+            Console.WriteLine("Done rendering");
+        }
+    }
+}
